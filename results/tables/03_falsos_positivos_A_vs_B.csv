@@ -1,0 +1,6 @@
+,mean,mean,std,std
+escenario,A,B_completo,A,B_completo
+modelo,,,,
+arbol,0.9145,0.0272,0.0037,0.0155
+kmeans,0.7619,0.0434,0.0079,0.0153
+naive_bayes,0.0414,0.0357,0.0,0.0

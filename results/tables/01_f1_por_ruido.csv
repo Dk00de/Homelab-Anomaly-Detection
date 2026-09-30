@@ -1,0 +1,12 @@
+,,mean,mean,mean,std,std,std
+ruido,,alto,bajo,medio,alto,bajo,medio
+escenario,modelo,,,,,,
+A,arbol,0.195,0.196,0.195,0.001,0.001,0.001
+A,kmeans,0.211,0.21,0.206,0.009,0.004,0.009
+A,naive_bayes,0.366,0.467,0.477,0.067,0.109,0.082
+B_completo,arbol,0.718,0.946,0.752,0.083,0.065,0.136
+B_completo,kmeans,0.342,0.837,0.6,0.068,0.048,0.134
+B_completo,naive_bayes,0.381,0.867,0.676,0.097,0.015,0.071
+B_contenido,arbol,0.785,0.734,0.715,0.082,0.119,0.129
+B_contenido,kmeans,0.345,0.401,0.437,0.182,0.099,0.162
+B_contenido,naive_bayes,0.323,0.448,0.446,0.062,0.113,0.078

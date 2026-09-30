@@ -1,0 +1,12 @@
+# Entorno
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# Datos: nunca se versionan (tamaño + privacidad: los logs del homelab
+# contienen dominio, rutas y usuario). Ver data/README.md para obtenerlos.
+data/*
+!data/README.md

@@ -1,0 +1,13 @@
+variable,ks
+path_depth,0.607
+ratio_upper,0.416
+path_len,0.415
+ratio_digit,0.38
+entropy,0.236
+payload_len,0.231
+body_len,0.222
+max_param_len,0.195
+n_params,0.172
+n_pct_encoded,0.154
+method_post,0.135
+method_get,0.13

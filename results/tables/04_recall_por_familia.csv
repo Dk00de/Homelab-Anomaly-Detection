@@ -1,8 +1,8 @@
 ,recall_inyeccion,recall_escaneo,recall_fuerza_bruta,recall
-Árbol (contenido),0.97,0.841,0.406,0.756
-Naive Bayes (contenido),0.615,0.397,0.0,0.383
-K-means (contenido),0.699,0.285,0.0,0.383
-Árbol (contenido + contexto),0.946,0.669,0.734,0.758
+Árbol (sin contexto),0.97,0.841,0.406,0.756
+Naive Bayes (sin contexto),0.615,0.397,0.0,0.383
+K-means (sin contexto),0.699,0.285,0.0,0.383
+Árbol (con contexto),0.946,0.669,0.734,0.758
 Regla fail2ban sola,0.0,0.245,0.873,0.299
-Árbol (contenido) + fail2ban,0.97,0.886,0.94,0.921
-Árbol (completo) + fail2ban,0.946,0.729,0.945,0.833
+Árbol (sin contexto) + fail2ban,0.97,0.886,0.94,0.921
+Árbol (con contexto) + fail2ban,0.946,0.729,0.945,0.833

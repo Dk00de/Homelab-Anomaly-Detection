@@ -27,8 +27,8 @@ MODEL_COLOR = {"arbol": "#2a78d6", "naive_bayes": "#eb6834", "kmeans": "#1baf7a"
 MODEL_LABEL = {"arbol": "Árbol de decisión", "naive_bayes": "Naive Bayes", "kmeans": "K-means", "fail2ban": "Regla fail2ban"}
 MODELS = ["arbol", "naive_bayes", "kmeans"]
 BLUES = LinearSegmentedColormap.from_list("blues", ["#f4f8fd", "#cde2fb", "#86b6ef", "#3987e5", "#256abf", "#104281"])
-SCEN_LABEL = {"A": "A · entrenado con CSIC", "B_contenido": "B · homelab, solo contenido",
-              "B_completo": "B · homelab, contenido + contexto"}
+SCEN_LABEL = {"A": "Entrenado con CSIC", "B_contenido": "Entrenado con homelab, sin contexto",
+              "B_completo": "Entrenado con homelab, con contexto"}
 NOISES = ["bajo", "medio", "alto"]
 FAMILIES = ["inyeccion", "escaneo", "fuerza_bruta"]
 FAMILY_LABEL = {"inyeccion": "Inyección", "escaneo": "Escaneo", "fuerza_bruta": "Fuerza bruta"}
@@ -127,7 +127,7 @@ def fig_desbalance(runs):
     ax.set_ylabel("F1")
     ax.set_ylim(0, 1.02)
     ax.set_xlim(-0.2, 2.35)
-    ax.set_title("A menos ataques, peor F1 — B_completo, ruido medio", loc="left")
+    ax.set_title(f"A menos ataques, peor F1 — {SCEN_LABEL['B_completo'].lower()}, ruido medio", loc="left")
     ax.legend(loc="lower left", fontsize=9)
     fig.tight_layout()
     _save(fig, "02_f1_por_desbalance", g.pivot_table(index="modelo", columns="ataques",
@@ -135,7 +135,7 @@ def fig_desbalance(runs):
 
 
 def fig_falsos_positivos(runs):
-    """FPR sobre tráfico legítimo: A vs B (ruido medio, 10%)."""
+    """FPR sobre tráfico legítimo: entrenado con CSIC vs con homelab + contexto (ruido medio, 10%)."""
     d = _base(runs)
     d = d[(d["ruido"] == "medio") & (d["ataques"] == 0.1) & d["escenario"].isin(["A", "B_completo"])]
     g = d.groupby(["escenario", "modelo"])["fpr"].agg(["mean", "std"]).reset_index()
@@ -180,13 +180,13 @@ def fig_familias(runs):
     """Recall por familia de ataque: modelo, regla y combinación (ruido medio, 10%)."""
     d = runs[(runs["ruido"] == "medio") & (runs["ataques"] == 0.1)]
     rows = [
-        ("B_contenido", "arbol", "Árbol (contenido)"),
-        ("B_contenido", "naive_bayes", "Naive Bayes (contenido)"),
-        ("B_contenido", "kmeans", "K-means (contenido)"),
-        ("B_completo", "arbol", "Árbol (contenido + contexto)"),
+        ("B_contenido", "arbol", "Árbol (sin contexto)"),
+        ("B_contenido", "naive_bayes", "Naive Bayes (sin contexto)"),
+        ("B_contenido", "kmeans", "K-means (sin contexto)"),
+        ("B_completo", "arbol", "Árbol (con contexto)"),
         ("regla", "fail2ban", "Regla fail2ban sola"),
-        ("B_contenido+fail2ban", "arbol", "Árbol (contenido) + fail2ban"),
-        ("B_completo+fail2ban", "arbol", "Árbol (completo) + fail2ban"),
+        ("B_contenido+fail2ban", "arbol", "Árbol (sin contexto) + fail2ban"),
+        ("B_completo+fail2ban", "arbol", "Árbol (con contexto) + fail2ban"),
     ]
     cols = [f"recall_{f}" for f in FAMILIES] + ["recall"]
     M = np.array([d[(d["escenario"] == s) & (d["modelo"] == m)][cols].mean().to_numpy() for s, m, _ in rows])
